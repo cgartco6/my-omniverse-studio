@@ -1,0 +1,42 @@
+name: Studio Continuous Integration and Deployment Engine
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  audit-and-build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Studio Repository Sources
+      uses: actions/checkout@v4
+
+    - name: Set up Environment Node Worker
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+        cache: 'npm'
+        cache-dependency-path: frontend/package.json
+
+    - name: Audit Frontend Packages
+      run: |
+        cd frontend
+        npm install --prefer-offline --no-audit
+
+    - name: Set up Environment Python Infrastructure
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+
+    - name: Audit Python Engineering Stack
+      run: |
+        cd backend
+        pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Verify Container Infrastructure Build Setup
+      run: |
+        docker compose config
