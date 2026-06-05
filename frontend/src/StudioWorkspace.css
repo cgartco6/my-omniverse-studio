@@ -1,0 +1,49 @@
+/* Responsive Layout Grid matching your studio viewports */
+.studio-container {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.studio-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+@media (max-width: 1024px) {
+  .studio-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* User Interface States */
+.badge-owner {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid #10b981;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.status-ready {
+  color: #10b981;
+  font-weight: bold;
+  display: block;
+  margin-top: 8px;
+}
+
+.txt-muted {
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* Deep Space Inputs styling controls */
+textarea, input[type="text"] {
+  transition: border-color 0.2s ease;
+}
+
+textarea:focus, input[type="text"]:focus {
+  border-color: #3b82f6 !important;
+  outline: none;
+}
